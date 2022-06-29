@@ -31,6 +31,20 @@ app.get('/flashcards', async (req, res) => {
         return res.status(500);
     }
 });
+
+
+app.get('/flashcards/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const flashcard = await Flashcard.findOne({
+            where: { id }
+        });
+        return res.json(flashcard);
+    } catch (err) {
+        console.log(err);
+        return res.status(500);
+    }
+});
  
 app.listen(port, async () => {
     console.log(`Listening on http://localhost:${port}`);
